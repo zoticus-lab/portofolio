@@ -1,0 +1,782 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="Single-page static portfolio Rafi Syahrulfalah dengan full-screen scroll snapping, animasi scroll-triggered, dan carousel proyek." />
+  <title>Rafi Syahrulfalah | Cinematic Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['"Space Grotesk"', 'sans-serif'],
+            body: ['"Inter"', 'sans-serif'],
+          },
+          boxShadow: {
+            glow: '0 0 0 1px rgba(16, 185, 129, 0.14), 0 24px 80px rgba(2, 6, 23, 0.85)',
+          },
+        },
+      },
+    };
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body class="font-body text-slate-100 antialiased selection:bg-emerald-400/30 selection:text-white">
+  <div class="pointer-events-none fixed inset-0 grid-noise opacity-35"></div>
+
+  <!-- GLOBAL HUD / SECTION INDICATOR -->
+  <div class="fixed left-4 top-1/2 z-40 hidden -translate-y-1/2 lg:block">
+    <div class="flex flex-col gap-3 rounded-full border border-white/10 bg-slate-950/60 px-2 py-3 glass">
+      <a href="#hero" data-dot="hero" class="section-dot h-3 w-3 rounded-full bg-white/30 transition"></a>
+      <a href="#skills" data-dot="skills" class="section-dot h-3 w-3 rounded-full bg-white/30 transition"></a>
+      <a href="#project-1" data-dot="project-1" class="section-dot h-3 w-3 rounded-full bg-white/30 transition"></a>
+      <a href="#project-2" data-dot="project-2" class="section-dot h-3 w-3 rounded-full bg-white/30 transition"></a>
+      <a href="#project-3" data-dot="project-3" class="section-dot h-3 w-3 rounded-full bg-white/30 transition"></a>
+      <a href="#contact" data-dot="contact" class="section-dot h-3 w-3 rounded-full bg-white/30 transition"></a>
+    </div>
+  </div>
+
+  <!-- TOP BAR -->
+  <header class="fixed inset-x-0 top-0 z-50 border-b border-white/8 bg-slate-950/55 glass">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 lg:px-8">
+      <a href="#hero" class="group flex items-center gap-3">
+        <div
+          class="flex h-11 w-11 items-center justify-center rounded-2xl border border-emerald-400/20 bg-emerald-400/10 text-lg font-bold text-emerald-300 shadow-glow transition group-hover:scale-105">
+          RS
+        </div>
+        <div>
+          <p class="font-display text-sm font-semibold uppercase tracking-[0.3em] text-slate-200">
+            Rafi Syahrulfalah
+          </p>
+          <p class="text-xs text-slate-500">Cinematic Portfolio</p>
+        </div>
+      </a>
+
+      <nav class="hidden items-center gap-6 text-sm text-slate-300 md:flex">
+        <a href="#skills" class="transition hover:text-emerald-300">Skills</a>
+        <a href="#project-1" class="transition hover:text-emerald-300">Projects</a>
+        <a href="#contact" class="transition hover:text-emerald-300">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="snap-shell h-screen overflow-y-auto overflow-x-hidden pt-20">
+    <!-- SECTION 1: HERO -->
+    <section id="hero" class="section snap-section relative flex min-h-screen items-center overflow-hidden">
+      <div
+        class="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(99,102,241,0.2),transparent_26%),radial-gradient(circle_at_bottom_right,rgba(16,185,129,0.16),transparent_24%)]">
+      </div>
+      <div
+        class="mx-auto grid h-full w-full max-w-7xl items-center gap-12 px-6 py-16 lg:grid-cols-[1.05fr_0.95fr] lg:px-8">
+        <div class="relative z-10 max-w-3xl">
+          <!-- HERO COPY -->
+          <div
+            class="reveal delay-1 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-slate-300">
+            <span class="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_16px_rgba(16,185,129,0.8)]"></span>
+            Itenas Bandung • Informatika • 24/7 Builder Mindset
+          </div>
+
+          <h1 id="typing-title"
+            class="reveal delay-2 typing-caret mt-6 font-display text-5xl font-bold tracking-tight text-white sm:text-6xl lg:text-7xl">
+            Rafi Syahrulfalah
+          </h1>
+
+          <p class="reveal delay-3 mt-5 max-w-2xl text-lg font-medium text-emerald-300 sm:text-xl">
+            Informatics Student | Full-Stack Developer &amp; DevOps Enthusiast
+          </p>
+
+          <p class="reveal delay-4 mt-6 max-w-2xl text-base leading-8 text-slate-300 sm:text-lg">
+            Halo! Saya adalah mahasiswa Informatika di Itenas Bandung yang memiliki ketertarikan kuat dalam pengembangan
+            web full-stack, manajemen infrastruktur server (homelab), dan implementasi DevOps. Saya senang mengulik
+            teknologi baru dari hulu ke hilir—mulai dari mendesain arsitektur database, menulis kode aplikasi yang
+            efisien, hingga
+            men-deploy sistem secara aman menggunakan Docker.
+          </p>
+
+          <div class="reveal delay-4 mt-8 flex flex-col gap-4 sm:flex-row">
+            <a href="#project-1"
+              class="inline-flex items-center justify-center rounded-2xl bg-emerald-400 px-6 py-3 font-semibold text-slate-950 transition duration-200 hover:-translate-y-0.5 hover:bg-emerald-300">
+              Lihat Proyek
+            </a>
+            <a href="#contact"
+              class="inline-flex items-center justify-center rounded-2xl border border-white/10 bg-white/5 px-6 py-3 font-semibold text-slate-200 transition duration-200 hover:-translate-y-0.5 hover:border-indigo-400/30 hover:text-indigo-300">
+              Hubungi Saya
+            </a>
+          </div>
+
+          <div class="reveal delay-4 mt-10 grid gap-4 sm:grid-cols-3">
+            <div class="rounded-2xl border border-white/10 bg-slate-950/40 p-4">
+              <p class="text-xs uppercase tracking-[0.28em] text-emerald-300">Full-Stack</p>
+              <p class="mt-2 text-sm text-slate-300">React, Node.js, MySQL</p>
+            </div>
+            <div class="rounded-2xl border border-white/10 bg-slate-950/40 p-4">
+              <p class="text-xs uppercase tracking-[0.28em] text-indigo-300">DevOps</p>
+              <p class="mt-2 text-sm text-slate-300">Docker, CI/CD, Git</p>
+            </div>
+            <div class="rounded-2xl border border-white/10 bg-slate-950/40 p-4">
+              <p class="text-xs uppercase tracking-[0.28em] text-cyan-300">Homelab</p>
+              <p class="mt-2 text-sm text-slate-300">Docker, Linux, Tunnels</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="relative z-10 mx-auto flex w-full max-w-2xl justify-center reveal delay-2">
+          <!-- HERO VISUAL (BENTO GRID) -->
+          <div class="w-full max-w-[38rem] aspect-square rounded-[2rem] border border-white/10 bg-slate-950/40 p-4 sm:p-5 shadow-glow grid grid-cols-2 grid-rows-2 gap-3 sm:gap-4">
+            
+            <!-- Card 1: Qurban Platform (Tall Card, spans 2 rows) -->
+            <a href="#project-3" class="group col-span-1 row-span-2 rounded-[1.5rem] border border-cyan-500/20 bg-slate-900/40 hover:bg-slate-900/60 p-4 sm:p-5 flex flex-col justify-between overflow-hidden relative transition-all duration-300 hover:border-cyan-400 hover:shadow-[0_0_20px_rgba(34,211,238,0.15)]">
+              <!-- Grid Noise overlay -->
+              <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(34,211,238,0.1),transparent_40%)]"></div>
+              
+              <div class="relative z-10 flex flex-col gap-2">
+                <div class="flex items-center justify-between">
+                  <span class="rounded-full bg-cyan-500/10 border border-cyan-500/20 px-2.5 py-0.5 text-[8px] sm:text-[9px] font-semibold text-cyan-300 tracking-wider">LIVE</span>
+                  <span class="text-xs text-slate-500 font-mono">Project 03</span>
+                </div>
+                <h4 class="font-display font-bold text-sm sm:text-base text-white mt-1 group-hover:text-cyan-300 transition-colors">Qurban Platform</h4>
+                <p class="text-[10px] sm:text-xs text-slate-400 line-clamp-3 leading-relaxed">Sistem distribusi dengan pemindaian QR Code riil warga RW 04 Kelurahan Kebonwaru.</p>
+              </div>
+              
+              <div class="relative z-10 mt-4 rounded-xl border border-white/5 bg-slate-950/60 p-1.5 overflow-hidden flex-1 flex items-center justify-center">
+                <img src="assets/images/dashboard%20qurban.png" alt="Qurban Platform" class="w-full h-full object-cover rounded-lg transition-transform duration-500 group-hover:scale-105" />
+              </div>
+              
+              <div class="relative z-10 mt-3 pt-2 border-t border-white/5 flex items-center justify-between text-[8px] sm:text-[9px] text-slate-500 font-mono">
+                <span class="truncate pr-1">masjidalikhlasrt07.my.id</span>
+                <span class="text-cyan-400">View ➜</span>
+              </div>
+            </a>
+
+            <!-- Card 2: Personal Finance Tracker (Top-Right Card) -->
+            <a href="#project-2" class="group col-span-1 row-span-1 rounded-[1.5rem] border border-indigo-500/20 bg-slate-900/40 hover:bg-slate-900/60 p-4 sm:p-5 flex flex-col justify-between overflow-hidden relative transition-all duration-300 hover:border-indigo-400 hover:shadow-[0_0_20px_rgba(99,102,241,0.15)]">
+              <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(99,102,241,0.08),transparent_40%)]"></div>
+              
+              <div class="relative z-10 flex flex-col gap-1">
+                <div class="flex items-center justify-between">
+                  <span class="rounded-full bg-indigo-500/10 border border-indigo-500/20 px-2 py-0.5 text-[8px] sm:text-[9px] font-semibold text-indigo-300 tracking-wider">LOCAL</span>
+                  <span class="text-xs text-slate-500 font-mono">Project 02</span>
+                </div>
+                <h4 class="font-display font-bold text-sm sm:text-base text-white mt-1 group-hover:text-indigo-300 transition-colors">Finance Tracker</h4>
+              </div>
+              
+              <div class="relative z-10 mt-2 rounded-lg border border-white/5 bg-slate-950/60 p-1 overflow-hidden h-[4.5rem] flex items-center justify-center">
+                <img src="assets/images/Finance.png" alt="Finance Dashboard" class="w-full h-full object-cover rounded-md transition-transform duration-500 group-hover:scale-105" />
+              </div>
+              
+              <div class="relative z-10 mt-2 pt-2 border-t border-white/5 flex items-center justify-between text-[8px] sm:text-[9px] text-slate-500 font-mono">
+                <span>Homelab Docker</span>
+                <span class="text-indigo-400">View ➜</span>
+              </div>
+            </a>
+
+            <!-- Card 3: Automated Homelab (Bottom-Right Card) -->
+            <a href="#project-1" class="group col-span-1 row-span-1 rounded-[1.5rem] border border-emerald-500/20 bg-slate-900/40 hover:bg-slate-900/60 p-4 sm:p-5 flex flex-col justify-between overflow-hidden relative transition-all duration-300 hover:border-emerald-400 hover:shadow-[0_0_20px_rgba(16,185,129,0.15)]">
+              <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(16,185,129,0.08),transparent_40%)]"></div>
+              
+              <div class="relative z-10 flex flex-col gap-1">
+                <div class="flex items-center justify-between">
+                  <span class="rounded-full bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 text-[8px] sm:text-[9px] font-semibold text-emerald-400 tracking-wider">ACTIVE</span>
+                  <span class="text-xs text-slate-500 font-mono">Project 01</span>
+                </div>
+                <h4 class="font-display font-bold text-sm sm:text-base text-white mt-1 group-hover:text-emerald-300 transition-colors">Homelab Server</h4>
+              </div>
+              
+              <div class="relative z-10 mt-2 rounded-lg border border-white/5 bg-slate-950/60 p-1 overflow-hidden h-[4.5rem] flex items-center justify-center">
+                <img src="assets/images/gambar%20home%20server.jpeg" alt="Homelab Server" class="w-full h-full object-cover rounded-md transition-transform duration-500 group-hover:scale-105" />
+              </div>
+              
+              <div class="relative z-10 mt-2 pt-2 border-t border-white/5 flex items-center justify-between text-[8px] sm:text-[9px] text-slate-500 font-mono">
+                <span>Secure Cloud</span>
+                <span class="text-emerald-400">View ➜</span>
+              </div>
+            </a>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: SKILLS -->
+    <section id="skills" class="section snap-section relative flex min-h-screen items-center overflow-hidden">
+      <div
+        class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(99,102,241,0.18),transparent_24%),radial-gradient(circle_at_left_center,rgba(16,185,129,0.14),transparent_26%)]">
+      </div>
+      <div class="mx-auto flex h-full w-full max-w-7xl items-center px-6 py-16 lg:px-8">
+        <div class="w-full">
+          <!-- SKILLS COPY -->
+          <div class="max-w-3xl">
+            <p
+              class="reveal inline-flex rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-slate-300">
+              Skills Layer</p>
+            <h2 class="reveal delay-1 mt-5 font-display text-4xl font-bold text-white sm:text-5xl">Tooling yang
+              membentuk workflow saya</h2>
+            <p class="reveal delay-2 mt-4 max-w-2xl text-slate-300"></p>
+          </div>
+
+          <!-- SKILLS GRID -->
+          <div class="mt-10 grid gap-5 md:grid-cols-3">
+            <article class="reveal delay-1 rounded-[1.75rem] border border-white/10 bg-slate-950/55 p-6 shadow-glow">
+              <p class="text-xs uppercase tracking-[0.34em] text-emerald-300">Programming &amp; Frameworks</p>
+              <div class="mt-5 flex flex-wrap gap-3">
+                <span
+                  class="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-slate-100">JavaScript/TypeScript</span>
+                <span
+                  class="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-slate-100">Node.js</span>
+                <span
+                  class="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-slate-100">React</span>
+                <span class="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-slate-100">C++</span>
+                <span class="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-slate-100">C#</span>
+              </div>
+            </article>
+
+            <article class="reveal delay-2 rounded-[1.75rem] border border-white/10 bg-slate-950/55 p-6 shadow-glow">
+              <p class="text-xs uppercase tracking-[0.34em] text-indigo-300">Databases &amp; DevOps</p>
+              <div class="mt-5 flex flex-wrap gap-3">
+                <span
+                  class="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-slate-100">MySQL</span>
+                <span
+                  class="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-slate-100">Linux</span>
+                <span
+                  class="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-slate-100">Docker</span>
+                <span
+                  class="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-slate-100">Portainer</span>
+              </div>
+            </article>
+
+            <article class="reveal delay-3 rounded-[1.75rem] border border-white/10 bg-slate-950/55 p-6 shadow-glow">
+              <p class="text-xs uppercase tracking-[0.34em] text-cyan-300">Networking &amp; Tools</p>
+              <div class="mt-5 flex flex-wrap gap-3">
+                <span class="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-slate-100">Cloudflare
+                  Tunnels</span>
+                <span
+                  class="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-slate-100">Git/GitHub</span>
+              </div>
+            </article>
+          </div>
+
+          <!-- SKILLS FOOTER NOTE -->
+          <div class="reveal delay-4 mt-8 max-w-2xl text-sm text-slate-400">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: PROJECT ONE -->
+    <section id="project-1" class="section snap-section relative flex min-h-screen items-center overflow-hidden">
+      <div
+        class="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(16,185,129,0.14),transparent_26%),radial-gradient(circle_at_bottom_right,rgba(99,102,241,0.14),transparent_24%)]">
+      </div>
+      <div
+        class="mx-auto grid h-full w-full max-w-7xl items-center gap-10 px-6 py-16 lg:grid-cols-[0.95fr_1.05fr] lg:px-8">
+        <!-- PROJECT ONE TEXT -->
+        <div class="order-2 lg:order-1">
+          <p class="reveal text-sm font-semibold uppercase tracking-[0.34em] text-emerald-300">Project 01</p>
+          <h2
+            class="reveal delay-1 mt-4 max-w-2xl font-display text-4xl font-bold tracking-tight text-white sm:text-5xl">
+            Automated Homelab &amp; Secure Cloud Infrastructure</h2>
+          <p class="reveal delay-2 mt-5 max-w-2xl text-base leading-8 text-slate-300 sm:text-lg">Arsitektur server
+            berbasis Lenovo M710q dan Ubuntu 26.04 LTS yang berjalan headless. Multi-app diisolasi lewat Docker untuk
+            layanan Sistem Qurban dan Keuangan, lalu dipublikasikan secara aman melalui Cloudflare Tunnels.</p>
+
+          <div class="reveal delay-3 mt-6 flex flex-wrap gap-3">
+            <span class="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-emerald-100">Ubuntu
+              Server</span>
+            <span
+              class="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-emerald-100">Docker</span>
+            <span
+              class="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-emerald-100">Portainer</span>
+            <span class="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-emerald-100">Cloudflare
+              Tunnels</span>
+            <span class="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-emerald-100">MySQL</span>
+          </div>
+
+          <div class="reveal delay-4 mt-8 grid gap-4 sm:grid-cols-3">
+            <div class="rounded-2xl border border-white/10 bg-slate-950/50 p-4">
+              <p class="text-xs uppercase tracking-[0.28em] text-slate-500">Node</p>
+              <p class="mt-2 text-sm text-slate-200">Lenovo M710q</p>
+            </div>
+            <div class="rounded-2xl border border-white/10 bg-slate-950/50 p-4">
+              <p class="text-xs uppercase tracking-[0.28em] text-slate-500">Runtime</p>
+              <p class="mt-2 text-sm text-slate-200">24/7 Headless</p>
+            </div>
+            <div class="rounded-2xl border border-white/10 bg-slate-950/50 p-4">
+              <p class="text-xs uppercase tracking-[0.28em] text-slate-500">Access</p>
+              <p class="mt-2 text-sm text-slate-200">Secure Tunnel</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- PROJECT ONE SLIDER -->
+        <div class="order-1 lg:order-2">
+          <div class="reveal delay-2 rounded-[2rem] border border-white/10 bg-slate-950/55 p-4 shadow-glow">
+            <div class="mb-4 flex items-center justify-between px-2 text-xs uppercase tracking-[0.3em] text-slate-500">
+              <span>Homelab Case Study</span>
+              <span>3 Frames</span>
+            </div>
+
+            <div
+              class="relative overflow-hidden rounded-[1.5rem] border border-white/10 bg-slate-900/80 h-[28rem] sm:h-[32rem]">
+              <div class="carousel-track flex snap-x snap-mandatory overflow-x-auto scroll-smooth h-full" data-carousel>
+                <!-- Slide 1: Topologi Lokal -->
+                <article
+                  class="carousel-slide h-full w-full min-w-full shrink-0 snap-start overflow-y-auto bg-[radial-gradient(circle_at_top,rgba(16,185,129,0.18),transparent_25%),linear-gradient(180deg,rgba(15,23,42,0.75),rgba(2,6,23,0.98))] p-6 pb-24 sm:p-8 sm:pb-28 flex flex-col">
+                  <p class="text-xs uppercase tracking-[0.34em] text-emerald-300 mb-4">Topologi Lokal</p>
+                  <div class="flex-1 flex flex-col justify-center items-center">
+                    <div
+                      class="group relative overflow-hidden rounded-[1.5rem] border border-white/10 bg-slate-950/50 p-2 shadow-2xl transition-all duration-300 hover:border-emerald-500/30 w-full max-w-xl mx-auto">
+                      <img src="assets/images/topologi%20lokal.png" alt="Topologi Lokal"
+                        class="w-full h-auto rounded-[1rem] object-contain transition-transform duration-500 group-hover:scale-[1.02]" />
+                    </div>
+                  </div>
+                </article>
+
+                <!-- Slide 2: Diagram Tunnel -->
+                <article
+                  class="carousel-slide h-full w-full min-w-full shrink-0 snap-start overflow-y-auto bg-[radial-gradient(circle_at_top,rgba(99,102,241,0.18),transparent_25%),linear-gradient(180deg,rgba(15,23,42,0.75),rgba(2,6,23,0.98))] p-6 pb-24 sm:p-8 sm:pb-28 flex flex-col">
+                  <p class="text-xs uppercase tracking-[0.34em] text-indigo-300 mb-4">Diagram Tunnel</p>
+                  <div class="flex-1 flex flex-col justify-center items-center">
+                    <div
+                      class="group relative overflow-hidden rounded-[1.5rem] border border-white/10 bg-slate-950/50 p-2 shadow-2xl transition-all duration-300 hover:border-indigo-500/30 w-full max-w-xl mx-auto">
+                      <img src="assets/images/topologi%20tunnel.png" alt="Diagram Tunnel"
+                        class="w-full h-auto rounded-[1rem] object-contain transition-transform duration-500 group-hover:scale-[1.02]" />
+                    </div>
+                  </div>
+                </article>
+
+                <!-- Slide 3: Hardware / Node Server -->
+                <article
+                  class="carousel-slide h-full w-full min-w-full shrink-0 snap-start overflow-y-auto bg-[radial-gradient(circle_at_top,rgba(125,211,252,0.14),transparent_25%),linear-gradient(180deg,rgba(15,23,42,0.75),rgba(2,6,23,0.98))] p-6 pb-24 sm:p-8 sm:pb-28 flex flex-col">
+                  <p class="text-xs uppercase tracking-[0.34em] text-sky-300 mb-2">Hardware</p>
+                  <div class="flex-1 flex flex-col justify-center">
+                    <div class="grid min-w-0 gap-5 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+                      <!-- Left Column: Home Server Photo -->
+                      <div class="min-w-0 w-full">
+                        <div
+                          class="group relative overflow-hidden rounded-[1.25rem] border border-white/10 bg-slate-950/50 p-1.5 shadow-2xl transition-all duration-300 hover:border-sky-500/30">
+                          <img src="assets/images/gambar%20home%20server.jpeg" alt="Fisik Home Server"
+                            class="w-full h-[12rem] sm:h-[15rem] object-cover rounded-[1rem] transition-transform duration-500 group-hover:scale-[1.02]" />
+                        </div>
+                      </div>
+
+                      <!-- Right Column: Unified Specs & Description Card -->
+                      <div class="min-w-0">
+                        <div class="rounded-[1.25rem] border border-white/10 bg-slate-950/80 p-5 shadow-2xl space-y-4">
+                          <!-- Device Header -->
+                          <div class="flex items-center gap-3">
+                            <div
+                              class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-slate-900 border border-white/10 text-lg text-sky-400">
+                              📟
+                            </div>
+                            <div class="text-left">
+                              <h4 class="font-display font-bold text-white text-xs sm:text-sm">Lenovo ThinkCentre M710q
+                              </h4>
+                              <p class="text-[9px] text-slate-500 font-mono">Node-01 Homelab Server</p>
+                            </div>
+                          </div>
+
+                          <!-- Description -->
+                          <p class="text-[11px] text-left text-slate-400 leading-relaxed border-t border-white/5 pt-3">
+                            Konfigurasi hardware headless berdaya rendah 24/7 menggunakan mini PC yang diletakkan di rak
+                            lokal. Efisiensi energi tinggi namun bertenaga untuk menjalankan tumpukan kontainer
+                            terisolasi.
+                          </p>
+
+                          <!-- Specifications Table -->
+                          <div class="space-y-2 border-t border-white/5 pt-3 text-[11px]">
+                            <div class="flex justify-between">
+                              <span class="text-slate-500">OS</span>
+                              <span class="text-slate-200 font-medium font-mono">Ubuntu Server 26.04 LTS</span>
+                            </div>
+                            <div class="flex justify-between">
+                              <span class="text-slate-500">CPU</span>
+                              <span class="text-slate-200 font-medium font-mono">Intel i5-7400T (4 Cores, 2.4GHz)</span>
+                            </div>
+                            <div class="flex justify-between">
+                              <span class="text-slate-500">RAM</span>
+                              <span class="text-slate-200 font-medium font-mono">16GB DDR4 SO-DIMM</span>
+                            </div>
+                            <div class="flex justify-between">
+                              <span class="text-slate-500">Storage</span>
+                              <span class="text-slate-200 font-medium font-mono">512GB NVMe M.2 SSD</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              </div>
+
+              <!-- PROJECT ONE SLIDER CONTROLS -->
+              <div
+                class="absolute inset-x-0 bottom-0 z-20 flex items-center justify-between gap-3 border-t border-white/10 bg-slate-950/75 p-3 backdrop-blur-xl">
+                <button type="button"
+                  class="carousel-prev inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-200 transition hover:border-emerald-400/30 hover:text-emerald-300"
+                  data-carousel-prev aria-label="Slide sebelumnya">
+                  <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                  </svg>
+                </button>
+                <div class="flex gap-2" data-carousel-dots></div>
+                <button type="button"
+                  class="carousel-next inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-200 transition hover:border-emerald-400/30 hover:text-emerald-300"
+                  data-carousel-next aria-label="Slide berikutnya">
+                  <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: PROJECT TWO -->
+    <section id="project-2" class="section snap-section relative flex min-h-screen items-center overflow-hidden">
+      <div
+        class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(99,102,241,0.14),transparent_24%),radial-gradient(circle_at_left_bottom,rgba(16,185,129,0.14),transparent_24%)]">
+      </div>
+      <div class="mx-auto grid h-full w-full max-w-7xl items-center gap-10 px-6 py-16 lg:grid-cols-[1fr_1fr] lg:px-8">
+        <!-- PROJECT TWO SLIDER -->
+        <div>
+          <div class="reveal delay-2 rounded-[2rem] border border-white/10 bg-slate-950/55 p-4 shadow-glow">
+            <div class="mb-4 flex items-center justify-between px-2 text-xs uppercase tracking-[0.3em] text-slate-500">
+              <span>Application Gallery</span>
+              <span>4 Frames</span>
+            </div>
+            <div
+              class="relative overflow-hidden rounded-[1.5rem] border border-white/10 bg-slate-900/80 h-[28rem] sm:h-[32rem]">
+              <div class="carousel-track flex snap-x snap-mandatory overflow-x-auto scroll-smooth h-full" data-carousel>
+                <!-- Slide 1: Halaman Dashboard -->
+                <article
+                  class="carousel-slide h-full w-full min-w-full shrink-0 snap-start overflow-y-auto bg-[radial-gradient(circle_at_top,rgba(16,185,129,0.18),transparent_25%),linear-gradient(180deg,rgba(15,23,42,0.75),rgba(2,6,23,0.98))] p-6 pb-24 sm:p-8 sm:pb-28 flex flex-col">
+                  <p class="text-xs uppercase tracking-[0.34em] text-emerald-300 mb-4 font-semibold">Halaman Dashboard
+                  </p>
+                  <div class="flex-1 flex flex-col justify-center items-center">
+                    <div
+                      class="group relative overflow-hidden rounded-[1.5rem] border border-white/10 bg-slate-950/50 p-2 shadow-2xl transition-all duration-300 hover:border-emerald-500/30 w-full max-w-xl mx-auto">
+                      <img src="assets/images/Finance.png" alt="Halaman Dashboard"
+                        class="w-full h-auto max-h-[16rem] sm:max-h-[19rem] rounded-[1rem] object-contain transition-transform duration-500 group-hover:scale-[1.02]" />
+                    </div>
+                  </div>
+                </article>
+
+                <!-- Slide 2: Halaman Menu Transaksi -->
+                <article
+                  class="carousel-slide h-full w-full min-w-full shrink-0 snap-start overflow-y-auto bg-[radial-gradient(circle_at_top,rgba(99,102,241,0.18),transparent_25%),linear-gradient(180deg,rgba(15,23,42,0.75),rgba(2,6,23,0.98))] p-6 pb-24 sm:p-8 sm:pb-28 flex flex-col">
+                  <p class="text-xs uppercase tracking-[0.34em] text-indigo-300 mb-4 font-semibold">Halaman Menu
+                    Transaksi</p>
+                  <div class="flex-1 flex flex-col justify-center items-center">
+                    <div
+                      class="group relative overflow-hidden rounded-[1.5rem] border border-white/10 bg-slate-950/50 p-2 shadow-2xl transition-all duration-300 hover:border-indigo-500/30 w-full max-w-xl mx-auto">
+                      <img src="assets/images/finance%20transaksi.png" alt="Halaman Menu Transaksi"
+                        class="w-full h-auto max-h-[16rem] sm:max-h-[19rem] rounded-[1rem] object-contain transition-transform duration-500 group-hover:scale-[1.02]" />
+                    </div>
+                  </div>
+                </article>
+
+                <!-- Slide 3: Halaman Menu Report -->
+                <article
+                  class="carousel-slide h-full w-full min-w-full shrink-0 snap-start overflow-y-auto bg-[radial-gradient(circle_at_top,rgba(125,211,252,0.14),transparent_25%),linear-gradient(180deg,rgba(15,23,42,0.75),rgba(2,6,23,0.98))] p-6 pb-24 sm:p-8 sm:pb-28 flex flex-col">
+                  <p class="text-xs uppercase tracking-[0.34em] text-cyan-300 mb-4 font-semibold">Halaman Menu Report
+                  </p>
+                  <div class="flex-1 flex flex-col justify-center items-center">
+                    <div
+                      class="group relative overflow-hidden rounded-[1.5rem] border border-white/10 bg-slate-950/50 p-2 shadow-2xl transition-all duration-300 hover:border-cyan-500/30 w-full max-w-xl mx-auto">
+                      <img src="assets/images/finance%20report.png" alt="Halaman Menu Report"
+                        class="w-full h-auto max-h-[16rem] sm:max-h-[19rem] rounded-[1rem] object-contain transition-transform duration-500 group-hover:scale-[1.02]" />
+                    </div>
+                  </div>
+                </article>
+
+                <!-- Slide 4: Schema Core Database -->
+                <article
+                  class="carousel-slide h-full w-full min-w-full shrink-0 snap-start overflow-y-auto bg-[radial-gradient(circle_at_top,rgba(99,102,241,0.18),transparent_25%),linear-gradient(180deg,rgba(15,23,42,0.75),rgba(2,6,23,0.98))] p-6 pb-24 sm:p-8 sm:pb-28 flex flex-col">
+                  <p class="text-xs uppercase tracking-[0.34em] text-indigo-300 mb-4 font-semibold">Schema Core Database
+                  </p>
+                  <div class="flex-1 flex flex-col justify-center items-center">
+                    <div
+                      class="group relative overflow-hidden rounded-[1.5rem] border border-white/10 bg-slate-950/50 p-2 shadow-2xl transition-all duration-300 hover:border-indigo-500/30 w-full max-w-xl mx-auto">
+                      <img src="assets/images/database%20finance.png" alt="Schema Core Database"
+                        class="w-full h-auto max-h-[16rem] sm:max-h-[19rem] rounded-[1rem] object-contain transition-transform duration-500 group-hover:scale-[1.02]" />
+                    </div>
+                  </div>
+                </article>
+              </div>
+
+              <!-- PROJECT TWO SLIDER CONTROLS -->
+              <div
+                class="absolute inset-x-0 bottom-0 z-20 flex items-center justify-between gap-3 border-t border-white/10 bg-slate-950/75 p-3 backdrop-blur-xl">
+                <button type="button"
+                  class="carousel-prev inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-200 transition hover:border-indigo-400/30 hover:text-indigo-300"
+                  data-carousel-prev aria-label="Slide sebelumnya">
+                  <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                  </svg>
+                </button>
+                <div class="flex gap-2" data-carousel-dots></div>
+                <button type="button"
+                  class="carousel-next inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-200 transition hover:border-indigo-400/30 hover:text-indigo-300"
+                  data-carousel-next aria-label="Slide berikutnya">
+                  <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PROJECT TWO TEXT -->
+        <div>
+          <p class="reveal text-sm font-semibold uppercase tracking-[0.34em] text-indigo-300">Project 02</p>
+          <h2
+            class="reveal delay-1 mt-4 max-w-2xl font-display text-4xl font-bold tracking-tight text-white sm:text-5xl">
+            Personal Finance Tracker App</h2>
+          <p class="reveal delay-2 mt-5 max-w-2xl text-base leading-8 text-slate-300 sm:text-lg">Aplikasi web full-stack
+            untuk pencatatan keuangan personal yang dibangun dengan React, Node.js, dan MySQL. Seluruh stack dideploy
+            mandiri di server Docker agar mudah diatur, aman, dan tetap fleksibel untuk pengembangan berikutnya.</p>
+
+          <div class="reveal delay-3 mt-6 flex flex-wrap gap-3">
+            <span class="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-indigo-100">React</span>
+            <span
+              class="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-indigo-100">Node.js</span>
+            <span class="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-indigo-100">MySQL</span>
+            <span class="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-indigo-100">Docker</span>
+          </div>
+
+          <div class="reveal delay-4 mt-8 grid gap-4 sm:grid-cols-3">
+            <div class="rounded-2xl border border-white/10 bg-slate-950/50 p-4">
+              <p class="text-xs uppercase tracking-[0.28em] text-slate-500">Frontend</p>
+              <p class="mt-2 text-sm text-slate-200">Responsive dashboard</p>
+            </div>
+            <div class="rounded-2xl border border-white/10 bg-slate-950/50 p-4">
+              <p class="text-xs uppercase tracking-[0.28em] text-slate-500">API</p>
+              <p class="mt-2 text-sm text-slate-200">REST service</p>
+            </div>
+            <div class="rounded-2xl border border-white/10 bg-slate-950/50 p-4">
+              <p class="text-xs uppercase tracking-[0.28em] text-slate-500">Deploy</p>
+              <p class="mt-2 text-sm text-slate-200">Homelab Docker</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: PROJECT THREE -->
+    <section id="project-3" class="section snap-section relative flex min-h-screen items-center overflow-hidden">
+      <div
+        class="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(16,185,129,0.15),transparent_24%),radial-gradient(circle_at_right_center,rgba(99,102,241,0.15),transparent_24%)]">
+      </div>
+      <div
+        class="mx-auto grid h-full w-full max-w-7xl items-center gap-10 px-6 py-16 lg:grid-cols-[0.95fr_1.05fr] lg:px-8">
+        <!-- PROJECT THREE TEXT -->
+        <div class="order-2 lg:order-1">
+          <p class="reveal text-sm font-semibold uppercase tracking-[0.34em] text-cyan-300">Project 03</p>
+          <h2
+            class="reveal delay-1 mt-4 max-w-2xl font-display text-4xl font-bold tracking-tight text-white sm:text-5xl">
+            Qurban Distribution Platform</h2>
+          <p class="reveal delay-2 mt-5 max-w-2xl text-base leading-8 text-slate-300 sm:text-lg">Sistem berbasis web
+            full-stack untuk digitalisasi dan pengamanan distribusi daging kurban di RW 04 Kelurahan Kebonwaru secara
+            real-time. Memvalidasi ratusan kupon dengan pemindaian QR Code untuk mencegah klaim ganda dan meniadakan
+            antrean manual.</p>
+
+          <div class="reveal delay-3 mt-6 flex flex-wrap gap-3">
+            <span class="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-sky-100 font-mono">React
+              (Vite)</span>
+            <span
+              class="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-sky-100 font-mono">Node.js
+              &amp; Express</span>
+            <span
+              class="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-sky-100 font-mono">MySQL</span>
+            <span class="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-sky-100 font-mono">Docker
+              Compose</span>
+            <span
+              class="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-sky-100 font-mono">Cloudflare
+              Tunnel</span>
+            <span class="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-sky-100 font-mono">QR
+              Code Scanning</span>
+          </div>
+
+          <div class="reveal delay-4 mt-8 grid gap-4 sm:grid-cols-3">
+            <div class="rounded-2xl border border-white/10 bg-slate-950/50 p-4">
+              <p class="text-xs uppercase tracking-[0.28em] text-slate-500">Security</p>
+              <p class="mt-2 text-sm text-slate-200">Anti-Double Claim</p>
+            </div>
+            <div class="rounded-2xl border border-white/10 bg-slate-950/50 p-4">
+              <p class="text-xs uppercase tracking-[0.28em] text-slate-500">Validation</p>
+              <p class="mt-2 text-sm text-slate-200">Instant QR Scanner</p>
+            </div>
+            <div class="rounded-2xl border border-white/10 bg-slate-950/50 p-4">
+              <p class="text-xs uppercase tracking-[0.28em] text-slate-500">Deployment</p>
+              <p class="mt-2 text-sm text-slate-200">Cloudflare Tunnel</p>
+            </div>
+          </div>
+
+          <!-- Live Domain Link -->
+          <div class="reveal delay-5 mt-8">
+            <a href="https://masjidalikhlasrt07.my.id/" target="_blank" rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 rounded-xl bg-cyan-500/10 border border-cyan-400/20 px-5 py-3 text-sm font-semibold text-cyan-300 transition-all hover:bg-cyan-500/20 hover:border-cyan-400/40 hover:shadow-glow">
+              <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+              </svg>
+              Kunjungi Situs (masjidalikhlasrt07.my.id)
+            </a>
+          </div>
+        </div>
+
+        <!-- PROJECT THREE SLIDER -->
+        <div class="order-1 lg:order-2">
+          <div class="reveal delay-2 rounded-[2rem] border border-white/10 bg-slate-950/55 p-4 shadow-glow">
+            <div class="mb-4 flex items-center justify-between px-2 text-xs uppercase tracking-[0.3em] text-slate-500">
+              <span>Application Case Study</span>
+              <span>4 Frames</span>
+            </div>
+            <div
+              class="relative overflow-hidden rounded-[1.5rem] border border-white/10 bg-slate-900/80 h-[28rem] sm:h-[32rem]">
+              <div class="carousel-track flex snap-x snap-mandatory overflow-x-auto scroll-smooth h-full" data-carousel>
+
+                <!-- Slide 1: Dashboard Real-Time -->
+                <article
+                  class="carousel-slide h-full w-full min-w-full shrink-0 snap-start overflow-y-auto bg-[radial-gradient(circle_at_top,rgba(16,185,129,0.18),transparent_25%),linear-gradient(180deg,rgba(15,23,42,0.75),rgba(2,6,23,0.98))] p-6 pb-24 sm:p-8 sm:pb-28 flex flex-col">
+                  <p class="text-xs uppercase tracking-[0.34em] text-emerald-300 mb-4 font-semibold">Dashboard Real-Time
+                  </p>
+                  <div class="flex-1 flex flex-col justify-center items-center">
+                    <div
+                      class="group relative overflow-hidden rounded-[1.5rem] border border-white/10 bg-slate-950/50 p-2 shadow-2xl transition-all duration-300 hover:border-emerald-500/30 w-full max-w-xl mx-auto">
+                      <img src="assets/images/dashboard%20qurban.png" alt="Dashboard Real-Time"
+                        class="w-full h-auto max-h-[16rem] sm:max-h-[19rem] rounded-[1rem] object-contain transition-transform duration-500 group-hover:scale-[1.02]" />
+                    </div>
+                  </div>
+                </article>
+
+                <!-- Slide 2: Scan QR Code -->
+                <article
+                  class="carousel-slide h-full w-full min-w-full shrink-0 snap-start overflow-y-auto bg-[radial-gradient(circle_at_top,rgba(99,102,241,0.18),transparent_25%),linear-gradient(180deg,rgba(15,23,42,0.75),rgba(2,6,23,0.98))] p-6 pb-24 sm:p-8 sm:pb-28 flex flex-col">
+                  <p class="text-xs uppercase tracking-[0.34em] text-cyan-300 mb-4 font-semibold">Scan QR Code</p>
+                  <div class="flex-1 flex flex-col justify-center items-center">
+                    <div
+                      class="group relative overflow-hidden rounded-[1.5rem] border border-white/10 bg-slate-950/50 p-2 shadow-2xl transition-all duration-300 hover:border-cyan-500/30 w-full max-w-xl mx-auto">
+                      <img src="assets/images/scan%20qr%20code.jpeg" alt="Scan QR Code"
+                        class="w-full h-auto max-h-[16rem] sm:max-h-[19rem] rounded-[1rem] object-contain transition-transform duration-500 group-hover:scale-[1.02]" />
+                    </div>
+                  </div>
+                </article>
+
+                <!-- Slide 3: Cetak Kupon QR -->
+                <article
+                  class="carousel-slide h-full w-full min-w-full shrink-0 snap-start overflow-y-auto bg-[radial-gradient(circle_at_top,rgba(125,211,252,0.14),transparent_25%),linear-gradient(180deg,rgba(15,23,42,0.75),rgba(2,6,23,0.98))] p-6 pb-24 sm:p-8 sm:pb-28 flex flex-col">
+                  <p class="text-xs uppercase tracking-[0.34em] text-indigo-300 mb-4 font-semibold">Cetak Kupon QR</p>
+                  <div class="flex-1 flex flex-col justify-center items-center">
+                    <div
+                      class="group relative overflow-hidden rounded-[1.5rem] border border-white/10 bg-slate-950/50 p-2 shadow-2xl transition-all duration-300 hover:border-indigo-500/30 w-full max-w-xl mx-auto">
+                      <img src="assets/images/cetak%20kupon%20qr.png" alt="Cetak Kupon QR"
+                        class="w-full h-auto max-h-[16rem] sm:max-h-[19rem] rounded-[1rem] object-contain transition-transform duration-500 group-hover:scale-[1.02]" />
+                    </div>
+                  </div>
+                </article>
+
+                <!-- Slide 4: Schema Database Qurban -->
+                <article
+                  class="carousel-slide h-full w-full min-w-full shrink-0 snap-start overflow-y-auto bg-[radial-gradient(circle_at_top,rgba(99,102,241,0.18),transparent_25%),linear-gradient(180deg,rgba(15,23,42,0.75),rgba(2,6,23,0.98))] p-6 pb-24 sm:p-8 sm:pb-28 flex flex-col">
+                  <p class="text-xs uppercase tracking-[0.34em] text-emerald-300 mb-4 font-semibold">Schema Database
+                    Qurban</p>
+                  <div class="flex-1 flex flex-col justify-center items-center">
+                    <div
+                      class="group relative overflow-hidden rounded-[1.5rem] border border-white/10 bg-slate-950/50 p-2 shadow-2xl transition-all duration-300 hover:border-emerald-500/30 w-full max-w-xl mx-auto">
+                      <img src="assets/images/database%20schema%20qurban.png" alt="Schema Database Qurban"
+                        class="w-full h-auto max-h-[16rem] sm:max-h-[19rem] rounded-[1rem] object-contain transition-transform duration-500 group-hover:scale-[1.02]" />
+                    </div>
+                  </div>
+                </article>
+              </div>
+
+              <!-- PROJECT THREE SLIDER CONTROLS -->
+              <div
+                class="absolute inset-x-0 bottom-0 z-20 flex items-center justify-between gap-3 border-t border-white/10 bg-slate-950/75 p-3 backdrop-blur-xl">
+                <button type="button"
+                  class="carousel-prev inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-200 transition hover:border-cyan-400/30 hover:text-cyan-300"
+                  data-carousel-prev aria-label="Slide sebelumnya">
+                  <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                  </svg>
+                </button>
+                <div class="flex gap-2" data-carousel-dots></div>
+                <button type="button"
+                  class="carousel-next inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-200 transition hover:border-cyan-400/30 hover:text-cyan-300"
+                  data-carousel-next aria-label="Slide berikutnya">
+                  <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 6: CONTACT -->
+    <section id="contact" class="section snap-section relative flex min-h-screen items-center overflow-hidden">
+      <div
+        class="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(16,185,129,0.16),transparent_25%),radial-gradient(circle_at_bottom_right,rgba(99,102,241,0.14),transparent_24%)]">
+      </div>
+      <div class="mx-auto flex h-full w-full max-w-7xl items-center px-6 py-16 lg:px-8">
+        <!-- CONTACT CARD -->
+        <div class="w-full rounded-[2rem] border border-white/10 bg-slate-950/60 p-8 shadow-glow sm:p-10">
+          <p class="reveal text-sm font-semibold uppercase tracking-[0.34em] text-emerald-300">Contact</p>
+          <h2 class="reveal delay-1 mt-4 max-w-3xl font-display text-4xl font-bold text-white sm:text-5xl">Siap
+            berkolaborasi dalam web, server, dan DevOps.</h2>
+          <p class="reveal delay-2 mt-5 max-w-2xl text-base leading-8 text-slate-300 sm:text-lg">Kalau Anda ingin
+            berdiskusi soal sistem yang rapi, aman, dan scalable, saya terbuka untuk kolaborasi dan obrolan teknis.</p>
+
+          <div class="reveal delay-3 mt-8 flex flex-col gap-4 sm:flex-row">
+            <a href="https://github.com/" target="_blank" rel="noreferrer"
+              class="inline-flex items-center justify-center rounded-2xl border border-white/10 bg-white/5 px-6 py-3 font-semibold text-slate-100 transition hover:border-emerald-400/30 hover:text-emerald-300">GitHub</a>
+            <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer"
+              class="inline-flex items-center justify-center rounded-2xl border border-white/10 bg-white/5 px-6 py-3 font-semibold text-slate-100 transition hover:border-indigo-400/30 hover:text-indigo-300">LinkedIn</a>
+            <a href="mailto:rafi.syahrulfalah@example.com"
+              class="inline-flex items-center justify-center rounded-2xl border border-white/10 bg-white/5 px-6 py-3 font-semibold text-slate-100 transition hover:border-cyan-400/30 hover:text-cyan-300">Email</a>
+          </div>
+
+          <div class="reveal delay-4 mt-10 border-t border-white/10 pt-6 text-sm text-slate-500">
+            © <span id="year"></span> Rafi Syahrulfalah. Single Page Static Portfolio.
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- LIGHTBOX MODAL FOR IMAGES -->
+  <div id="lightbox"
+    class="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/90 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300">
+    <button id="lightbox-close"
+      class="absolute top-6 right-6 text-slate-400 hover:text-white transition-colors duration-200"
+      aria-label="Tutup gambar">
+      <svg class="h-8 w-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+    <div
+      class="lightbox-container relative max-h-[85vh] max-w-[90vw] overflow-hidden rounded-2xl border border-white/10 shadow-2xl transform scale-95 transition-transform duration-300">
+      <img id="lightbox-img" src="" alt="Tampilan diperbesar" class="max-h-[85vh] max-w-[90vw] object-contain" />
+    </div>
+  </div>
+
+  <script src="script.js" defer></script>
+</body>
+
+</html>
